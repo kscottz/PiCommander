@@ -5,7 +5,7 @@ Using RaspberryPi for Animatronics
 
 sudo pip install pika
 
-On the RaspberryPi
+On the RaspberryPi (Occidentalis)
 ==========================
 see http://www.rabbitmq.com/install-debian.html
 
@@ -16,3 +16,21 @@ deb http://www.rabbitmq.com/debian/ testing main
 Run apt-get update.
 
 sudo apt-get install rabbitmq-server
+
+copy the config file to /etc/rabbitmq
+sudo cp rabbitmq.config /etc/rabbitmq
+
+To start rabbitmq
+sudo rabbitmq-server
+
+Use rabbitmq-ctl to monitor/administer
+ 
+To monitor
+==============
+http://<Pi IP address>:15672/#/.
+login/pw: guest/guest
+http://www.rabbitmq.com/management.html
+
+logs in /var/log/rabbitmq
+tail the logs to see if you hit a memory issue. 
+
