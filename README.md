@@ -34,3 +34,8 @@ http://www.rabbitmq.com/management.html
 logs in /var/log/rabbitmq
 tail the logs to see if you hit a memory issue. 
 
+Client
+===============
+install RabbitMQ
+sudo pip install pika==0.9.8
+PyGTK as necessary
