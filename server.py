@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 import pika
 import pygame as pg
-#import pdb
 
-#pdb.set_trace()
-
-pg.mixer.pre_init(frequency=22050, size=-16, channels=1) # buffersize=4096)
+pg.mixer.pre_init(frequency=22050, size=-16, channels=1)
 pg.init()
 
 
@@ -27,9 +24,6 @@ exterminate = pg.mixer.Sound('./exterminate.wav')
 screech = pg.mixer.Sound('./screech.wav')
 goat = pg.mixer.Sound('./goat.wav')
 
-
-
-
 soundMap = {
     'bear':bear,
     'burp':burp,
@@ -48,8 +42,6 @@ soundMap = {
     'exterminate':exterminate,
     'screech':screech
     }
-
-
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(
         host='localhost'))
