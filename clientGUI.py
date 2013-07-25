@@ -10,27 +10,6 @@ import pika
 
 class HelloWorld:
 
-    # This is a callback function. The data arguments are ignored
-    # in this example. More on callbacks below.
-
-    # def bearCB(self, widget, data=None):
-    #     self.channel.basic_publish(exchange='',
-    #                                routing_key='hello',
-    #                                body='bear')
-    #     print " [x] Sent 'BEAR'"
-
-    # def burpCB(self, widget, data=None):
-    #     self.channel.basic_publish(exchange='',
-    #                                routing_key='hello',
-    #                                body='burp')
-    #     print " [x] Sent 'burp'"
-
-    # def goatCB(self, widget, data=None):
-    #     self.channel.basic_publish(exchange='',
-    #                                routing_key='hello',
-    #                                body='goat')
-    #     print " [x] Sent 'goat'"
-
     def CBMethod(self, widget, data=None):
         self.channel.basic_publish(exchange='',
                                    routing_key='hello',
@@ -81,10 +60,9 @@ class HelloWorld:
         self.window.set_border_width(30)
     
         # Creates a new button with the label "Hello World".
-        self.ButtonNames = ["bear","burp","goat","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar","roar4","screech","warning"]
+        self.ButtonNames = ["bear","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar","roar4","screech","warning"]
         self.Buttons = [gtk.Button(name) for name in self.ButtonNames]
     
-
         [self.vbox.pack_start(button) for button in self.Buttons]
         
         # When the button receives the "clicked" signal, it will call the
