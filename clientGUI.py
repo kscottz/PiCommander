@@ -12,29 +12,30 @@ class HelloWorld:
 
     # This is a callback function. The data arguments are ignored
     # in this example. More on callbacks below.
-    def hello(self, widget, data=None):
-        self.channel.basic_publish(exchange='',
-                                   routing_key='hello',
-                                   body='Hello World!')
-        print " [x] Sent 'Hello World!'"
 
-    def bearCB(self, widget, data=None):
-        self.channel.basic_publish(exchange='',
-                                   routing_key='hello',
-                                   body='bear')
-        print " [x] Sent 'BEAR'"
+    # def bearCB(self, widget, data=None):
+    #     self.channel.basic_publish(exchange='',
+    #                                routing_key='hello',
+    #                                body='bear')
+    #     print " [x] Sent 'BEAR'"
 
-    def burpCB(self, widget, data=None):
-        self.channel.basic_publish(exchange='',
-                                   routing_key='hello',
-                                   body='burp')
-        print " [x] Sent 'burp'"
+    # def burpCB(self, widget, data=None):
+    #     self.channel.basic_publish(exchange='',
+    #                                routing_key='hello',
+    #                                body='burp')
+    #     print " [x] Sent 'burp'"
 
-    def goatCB(self, widget, data=None):
+    # def goatCB(self, widget, data=None):
+    #     self.channel.basic_publish(exchange='',
+    #                                routing_key='hello',
+    #                                body='goat')
+    #     print " [x] Sent 'goat'"
+
+    def CBMethod(self, widget, data=None):
         self.channel.basic_publish(exchange='',
                                    routing_key='hello',
-                                   body='goat')
-        print " [x] Sent 'goat'"
+                                   body=data)
+        print " [x] Sent {0}".format(data)
 
 
     def delete_event(self, widget, event, data=None):
@@ -63,7 +64,7 @@ class HelloWorld:
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
         self.entry  = gtk.Entry()
         self.vbox = gtk.VBox()
-        self.vbox.pack_start(self.entry)
+
         # When the window is given the "delete_event" signal (this is given
         # by the window manager, usually by the "close" option, or on the
         # titlebar), we ask it to call the delete_event () function
@@ -80,44 +81,22 @@ class HelloWorld:
         self.window.set_border_width(30)
     
         # Creates a new button with the label "Hello World".
-        self.bear = gtk.Button("bear")
-        self.burp = gtk.Button("burp")
-        self.goat = gtk.Button("goat")        
-        self.button = gtk.Button("MWAAAAAAAAAAHAHAH!")
-        self.vbox.pack_start(self.button)
-        self.vbox.pack_start(self.bear)
-        self.vbox.pack_start(self.burp)
-        self.vbox.pack_start(self.goat)
+        self.ButtonNames = ["bear","burp","goat","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar","roar4","screech","warning"]
+        self.Buttons = [gtk.Button(name) for name in self.ButtonNames]
+    
+
+        [self.vbox.pack_start(button) for button in self.Buttons]
         
         # When the button receives the "clicked" signal, it will call the
         # function hello() passing it None as its argument.  The hello()
         # function is defined above.
-        self.button.connect("clicked", self.hello, None)
-        self.bear.connect("clicked", self.bearCB, None)
-        self.burp.connect("clicked", self.burpCB, None)
-        self.goat.connect("clicked", self.goatCB, None)
+        [button.connect("clicked", self.CBMethod, name) for button, name in zip(self.Buttons,self.ButtonNames)]
         
     
-        # This will cause the window to be destroyed by calling
-        # gtk_widget_destroy(window) when "clicked".  Again, the destroy
-        # signal could come from here, or the window manager.
-        #self.button.connect_object("clicked", gtk.Widget.destroy, self.window)
-    
         # This packs the button into the window (a GTK container).
-        #self.window.add(self.button)
-        #self.window.add(self.bear)
-        #self.window.add(self.burp)
-        #self.window.add(self.goat)
         self.window.add(self.vbox)
         self.window.show_all()
-        # The final step is to display this newly created widget.
-        #self.button.show()
-        #self.bear.show()
-        #self.burp.show()
-        #self.goat.show()
-    
-        # and the window
-        #self.window.show()
+ 
 
     def main(self):
         # All PyGTK applications must have a gtk.main(). Control ends here
