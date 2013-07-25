@@ -7,7 +7,7 @@ pg.init()
 
 
 bear = pg.mixer.Sound('./bear.wav')
-burp = pg.mixer.Sound('./burp.wav')
+
 lroar = pg.mixer.Sound('./lion_roar.wav')
 lgrowl = pg.mixer.Sound('./lion_growl.wav')
 panther = pg.mixer.Sound('./panther.wav')
@@ -23,10 +23,16 @@ backup = pg.mixer.Sound('./backUp.wav')
 exterminate = pg.mixer.Sound('./exterminate.wav')
 screech = pg.mixer.Sound('./screech.wav')
 goat = pg.mixer.Sound('./goat.wav')
+burp = pg.mixer.Sound('./burp.wav')
+belch = pg.mixer.Sound('./belch.wav')
+horn = pg.mixer.Sound('./horn.wav')
+
 
 soundMap = {
-    'bear':bear,
     'burp':burp,
+    'horn':horn,
+    'belch':belch,
+    'bear':bear,
     'goat':goat,
     'roar':lroar,
     'growl':lgrowl,

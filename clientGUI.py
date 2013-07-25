@@ -23,15 +23,12 @@ class HelloWorld:
         # you don't want the window to be destroyed.
         # This is useful for popping up 'are you sure you want to quit?'
         # type dialogs.
-        print "delete event occurred"
-
         # Change FALSE to TRUE and the main window will not be destroyed
         # with a "delete_event".
         return False
 
     def destroy(self, widget, data=None):
         self.connection.close()
-        print "destroy signal occurred"
         gtk.main_quit()
 
     def __init__(self):
@@ -60,7 +57,7 @@ class HelloWorld:
         self.window.set_border_width(30)
     
         # Creates a new button with the label "Hello World".
-        self.ButtonNames = ["bear","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar","roar4","screech","warning"]
+        self.ButtonNames = ["burp","belch","horn","goat","bear","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar","roar4","screech","warning"]
         self.Buttons = [gtk.Button(name) for name in self.ButtonNames]
     
         [self.vbox.pack_start(button) for button in self.Buttons]
