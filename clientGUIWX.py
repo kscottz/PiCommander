@@ -1,28 +1,34 @@
-#!/usr/bin/pytho
+#!/usr/bin/python
 import wx
 import random
-
-APP_SIZE_X = 300
-APP_SIZE_Y = 200
+import pika
+APP_SIZE_X = 200
+APP_SIZE_Y = 620
 class MyButtons(wx.Dialog):
-    def __init__(self, parent, id, title):
-        wx.Dialog.__init__(self, parent, id, title, size=(APP_SIZE_X, APP_SIZE_Y))
-        wx.Button(self, 1, 'Close', (50, 130))
-        wx.Button(self, 2, 'Random Move', (150, 130), (110, -1))
-        self.Bind(wx.EVT_BUTTON, self.OnClose, id=1)
-        self.Bind(wx.EVT_BUTTON, self.OnRandomMove, id=2)
-        self.Centre()
-        self.ShowModal()
-        self.Destroy()
+	def __init__(self, parent, id, title):
+		self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.1.204'))
+		self.channel = self.connection.channel()
+		self.channel.queue_declare(queue='hello')
+		self.ButtonNames = ["burp","belch","horn","goat","bear","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar","roar4","screech","warning"]
+		wx.Dialog.__init__(self, parent, id, title, size=(APP_SIZE_X, APP_SIZE_Y))
+		cnt = len(self.ButtonNames)
+		for name,idx in zip(self.ButtonNames,range(0,cnt)):
+			wx.Button(self,idx,name,(50,idx*30+10))
+			self.Bind(wx.EVT_BUTTON,self.CBMethod,id=idx)
 
-    def OnClose(self, event):
-        self.Close(True)
-        
-    def OnRandomMove(self, event):
-        screensize = wx.GetDisplaySize()
-        randx = random.randrange(0, screensize.x - APP_SIZE_X)
-        randy = random.randrange(0, screensize.y - APP_SIZE_Y)
-        self.Move((randx, randy))
+		self.Centre()
+		self.ShowModal()
+		self.Destroy()
+
+	def OnClose(self, event):
+		self.connection.close()
+		self.Close(True)
+
+	def CBMethod(self, data):
+		msg = data.GetEventObject().GetLabel()#self.ButtonNames[data.GetSelection()]
+		self.channel.basic_publish(exchange='',routing_key='hello',body=msg)
+		print " [x] Sent {0}".format(msg)
+		
 app = wx.App(0)
-MyButtons(None, -1, 'buttons.py')
+MyButtons(None, -1, 'DragonBot Sounds')
 app.MainLoop()
