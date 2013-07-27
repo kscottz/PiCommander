@@ -2,7 +2,7 @@
 import pika
 
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.1.143'))
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.1.204'))
 channel = connection.channel()
 channel.queue_declare(queue='hello')
 buttonNames = ["burp","belch","horn","goat","bear","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar","roar4","screech","warning"]
