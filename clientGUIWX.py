@@ -6,10 +6,10 @@ APP_SIZE_X = 200
 APP_SIZE_Y = 620
 class MyButtons(wx.Dialog):
 	def __init__(self, parent, id, title):
-		self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.1.204'))
+		self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='192.168.0.142'))
 		self.channel = self.connection.channel()
 		self.channel.queue_declare(queue='hello')
-		self.ButtonNames = ["burp","belch","horn","goat","bear","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar","roar4","screech","warning"]
+		self.ButtonNames = ["burp","belch","horn","goat","bear","backUp","exterminate","horse","growl","roar","meow","panther","rex","rex2","rex3","roar2","screech","warning"]
 		wx.Dialog.__init__(self, parent, id, title, size=(APP_SIZE_X, APP_SIZE_Y))
 		cnt = len(self.ButtonNames)
 		for name,idx in zip(self.ButtonNames,range(0,cnt)):

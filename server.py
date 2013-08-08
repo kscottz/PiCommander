@@ -42,7 +42,7 @@ soundMap = {
     'rex':rex,
     'rex2':rex2,
     'rex3':rex3,
-    'roar4':roar2,
+    'roar2':roar2,
     'backUp':backup,
     'warning':warning,
     'exterminate':exterminate,
